@@ -9,7 +9,7 @@ const execPromise = promisify(exec);
 
 // 1. Instantiate the MCP server
 const server = new Server(
-  { name: "cli-orquestrator-wsl", version: "1.0.0" },
+  { name: "cli-orchestrator-wsl", version: "1.0.0" },
   { capabilities: { tools: {} } }
 );
 

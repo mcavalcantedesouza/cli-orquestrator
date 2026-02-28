@@ -39,27 +39,27 @@ Cline is just the interface; it needs an AI backend to perform reasoning. This p
 
 ## 🔌 Connecting the MCP Server to Cline
 
-Este projeto foi desenhado para rodar o arquivo TypeScript diretamente, aproveitando os recursos do Node 24. Para plugar este servidor na sua IA:
+This project is designed to execute the TypeScript file directly, leveraging Node 24's native support. To plug the server into your AI:
 
-1. Abra o VS Code e vá até a aba da extensão **Cline**.
-2. Clique no ícone de Servidores MCP (ícone de tomada/servidor).
-3. Abra as configurações do MCP (isso editará o arquivo `cline_mcp_settings.json`).
-4. Adicione a configuração abaixo, substituindo o caminho pelo local exato do repositório no seu WSL:
+1. Open VS Code and go to the **Cline** extension panel.
+2. Click the **MCP Servers** icon (the plug/server symbol).
+3. Open MCP settings (this will edit `cline_mcp_settings.json`).
+4. Add the configuration below, replacing the path with the absolute location of this repo in your WSL:
 
 ```json
 {
   "mcpServers": {
-    "orquestrador_wsl": {
+    "orchestrator_wsl": {
       "command": "node",
       "args": [
-        "/caminho/absoluto/para/este/repositorio/index.ts"
+        "/absolute/path/to/this/repo/index.ts"
       ]
     }
   }
 }
 ```
 
-5. Salve o arquivo. O servidor conectará automaticamente e a ferramenta `executar_comando` ficará disponível para a IA.
+5. Save the file. The server will connect automatically, and the `executar_comando` tool becomes available to the AI.
 
 ## 🎯 Usage Examples
 
