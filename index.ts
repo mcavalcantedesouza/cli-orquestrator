@@ -4,26 +4,26 @@ import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprot
 import { exec } from "child_process";
 import { promisify } from "util";
 
-// Transforma o exec tradicional em uma Promessa para usarmos com async/await
+// Convert the classic exec into a Promise so we can use async/await
 const execPromise = promisify(exec);
 
-// 1. Instancia o servidor MCP
+// 1. Instantiate the MCP server
 const server = new Server(
   { name: "cli-orquestrator-wsl", version: "1.0.0" },
   { capabilities: { tools: {} } }
 );
 
-// 2. Define a ferramenta para a IA
+// 2. Define the tool for the AI
 server.setRequestHandler(ListToolsRequestSchema, async () => {
   return {
     tools: [
       {
         name: "executar_comando",
-        description: "Executa um comando de terminal (bash/zsh) no sistema Ubuntu/WSL e retorna a saída (stdout/stderr).",
+        description: "Executes a terminal command (bash/zsh) on the Ubuntu/WSL system and returns the output (stdout/stderr).",
         inputSchema: {
           type: "object",
           properties: {
-            comando: { type: "string", description: "O comando exato a ser executado." }
+            comando: { type: "string", description: "The exact command to execute." }
           },
           required: ["comando"]
         }
@@ -31,7 +31,6 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
     ]
   };
 });
-
 // 3. Executa a ferramenta
 server.setRequestHandler(CallToolRequestSchema, async (request) => {
   if (request.params.name === "executar_comando") {

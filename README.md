@@ -1,44 +1,43 @@
-# 🚀 MCP Orquestrador CLI (WSL)
+# 🚀 MCP CLI Orchestrator (WSL)
 
-Este repositório contém um servidor **Model Context Protocol (MCP)** construído em TypeScript. Ele atua como uma ponte, permitindo que assistentes de Inteligência Artificial (como o Cline) executem comandos de terminal nativamente dentro do ambiente Linux (WSL).
+This repository contains a **Model Context Protocol (MCP)** server written in TypeScript. It acts as a bridge, allowing AI assistants (such as Cline) to execute terminal commands natively within a Linux (WSL) environment.
 
-Com este servidor rodando, a IA ganha a capacidade de ler arquivos, gerenciar pastas, monitorar recursos do sistema e orquestrar ferramentas de linha de comando de forma autônoma.
+With this server running, the AI gains the ability to read files, manage folders, monitor system resources, and orchestrate command‑line tools autonomously.
 
-## 📋 Pré-requisitos
+## 📋 Prerequisites
 
-Para rodar este projeto, seu ambiente precisa de:
+The following are required to run this project:
 
-* **Node.js:** Versão **24** ou superior (necessário para a execução nativa de arquivos `.ts` sem etapa de compilação).
-* **Ambiente:** Linux ou WSL (Ubuntu recomendado).
-* **Cliente MCP:** Extensão [Cline](https://marketplace.visualstudio.com/items?itemName=saoudrizwan.claude-dev) (ou Roo Code) instalada no VS Code.
+* **Node.js:** Version **24** or higher (required for native execution of `.ts` files without a build step).
+* **Platform:** Linux or WSL (Ubuntu recommended).
+* **MCP client:** [Cline](https://marketplace.visualstudio.com/items?itemName=saoudrizwan.claude-dev) (or Roo Code) extension installed in VS Code.
 
-## 🛠️ Instalação
+## 🛠️ Installation
 
-Como os arquivos de configuração (`package.json` e `tsconfig.json`) já estão no repositório, basta instalar as dependências.
+The configuration files (`package.json` and `tsconfig.json`) are already in the repo, so you just need to install dependencies.
 
-No terminal do seu WSL, dentro da pasta raiz do projeto, execute:
+From a WSL terminal inside the project root, run:
 
 ```bash
 npm install
 ```
 
-## 🧠 Configurando a Inteligência Artificial (Google Gemini)
+## 🧠 Configuring the AI (Google Gemini)
 
-O Cline é apenas a interface; ele precisa de um provedor de IA para processar os raciocínios. Neste projeto, utilizamos a API gratuita do Google Gemini.
+Cline is just the interface; it needs an AI backend to perform reasoning. This project uses the free Google Gemini API.
 
-1. Acesse o painel do [Google AI Studio](https://aistudio.google.com/).
-2. Faça login com a sua conta Google e clique no menu lateral **Get API key** para gerar a sua chave de acesso gratuita.
-3. No VS Code, abra a aba da extensão **Cline**.
-4. Clique no ícone de engrenagem (Settings) no topo da extensão para abrir a tela de configuração.
-5. Na seção **API Configuration**, preencha da seguinte forma:
-   * **API Provider:** Selecione `Google Gemini`.
-   * **Gemini API Key:** Cole a chave gerada no passo 2.
-   * **Model:** Selecione `gemini-2.5-flash` (ideal para tarefas rápidas de terminal) ou `gemini-2.5-pro` (para análises profundas de código e planejamento).
+1. Open the [Google AI Studio](https://aistudio.google.com/).
+2. Sign in with your Google account and click **Get API key** in the sidebar to generate a free access key.
+3. In VS Code, open the **Cline** extension panel.
+4. Click the gear icon (Settings) at the top of the panel to open the configuration screen.
+5. In the **API Configuration** section fill in:
+   * **API Provider:** select `Google Gemini`.
+   * **Gemini API Key:** paste the key obtained in step 2.
+   * **Model:** choose `gemini-2.5-flash` (for quick terminal tasks) or `gemini-2.5-pro` (for deeper code analysis and planning).
 
+6. Click **Done** to finish.
 
-6. Clique no botão **Done** para concluir.
-
-## 🔌 Como Conectar o Servidor MCP ao Cline
+## 🔌 Connecting the MCP Server to Cline
 
 Este projeto foi desenhado para rodar o arquivo TypeScript diretamente, aproveitando os recursos do Node 24. Para plugar este servidor na sua IA:
 
@@ -62,17 +61,18 @@ Este projeto foi desenhado para rodar o arquivo TypeScript diretamente, aproveit
 
 5. Salve o arquivo. O servidor conectará automaticamente e a ferramenta `executar_comando` ficará disponível para a IA.
 
-## 🎯 Exemplos de Uso
+## 🎯 Usage Examples
 
-No chat do seu assistente de IA, você pode enviar prompts como:
+In your AI assistant chat, you can send prompts like:
 
-* *"Crie uma pasta chamada 'testes', adicione um arquivo de log vazio lá dentro e liste o conteúdo para confirmar."*
-* *"Use o `df -h` e me diga como está o espaço do meu disco."*
-* *"Leia as últimas 20 linhas do arquivo de log em `/var/log/syslog` e procure por erros."*
+* **"Create a folder named `tests`, add an empty log file inside it, and list the contents to confirm."**
+* **"Run `df -h` and tell me how much disk space is available."**
+* **"Read the last 20 lines of `/var/log/syslog` and look for any errors."**
 
-## ⚠️ Segurança e Boas Práticas
+## ⚠️ Security & Best Practices
 
-**Atenção:** Este servidor executa comandos de shell (via `child_process`).
+**Warning:** This server executes shell commands (`child_process`) on your machine.
 
-* Certifique-se de manter a opção de **Aprovação Manual (Approve)** sempre ativada no seu cliente MCP.
-* Leia os comandos gerados pela IA antes de autorizar a execução, especialmente para comandos que envolvem remoção de arquivos (`rm`) ou alterações de permissão.
+* Always keep **Manual Approval** enabled in your MCP client.
+* Review the commands generated by the AI before authorizing them, especially those that delete files (`rm`), install global packages, or change permissions.
+
